@@ -2,7 +2,7 @@ from flask import Flask, request,jsonify
 from flask_cors import CORS
 from connection import Connection
 app = Flask(__name__)
-
+#Apply configurations
 app.config["MYSQL_HOST"]= "localhost"
 app.config["MYSQL_USER"]= "root"
 app.config["MYSQL_PASSWORD"]= "password"
