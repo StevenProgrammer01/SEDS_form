@@ -23,7 +23,7 @@ def createCompetence():
         request.json["attendance"],
         request.json["mode"],
         request.json["language"])
-    return "received"
+    return {"msg": "Created"}
 @app.route("/competences", methods = ["GET"])
 #Mostrar todas las competencias
 def getCompetences():
@@ -44,7 +44,7 @@ def getCompetences():
             "mode":d[9],
             "language":d[10]
         })
-        print(competences)
+        #print(competences)
     return jsonify(competences)
 #Mostrar una competencia
 @app.route("/competence/<id>", methods = ["GET"])
@@ -59,13 +59,13 @@ def getCompetence(id):
             "date":d[3],
             "requirements":d[4],
             "source": d[5],
-            "active": d[6],
+            "state": d[6],
             "cost":d[7],
             "attendance":d[8],
-            "participation":d[9],
+            "mode":d[9],
             "language":d[10]
         })
-        print(competence)
+        #print(competence)
     return jsonify(competence)
 @app.route("/competence/<id>", methods = ["PUT"])
 #Actualizar una competencia
@@ -77,20 +77,22 @@ def updateCompetence(id):
         request.json["date"],
         request.json["requirements"],
         request.json["source"],
-        request.json["active"],
+        request.json["state"],
         request.json["cost"],
         request.json["attendance"],
-        request.json["participation"],
+        request.json["mode"],
         request.json["language"]
         )
-    return "received"
+    return {"msg": "Updated"}
 
 @app.route("/competence/<id>", methods = ["DELETE"])
 #Eliminar una competencia
 def deleteCompetence(id):
     con.deleteCompetence(id)
-    print(type(id))
-    return "received"
+    #print(type(id))
+    return {
+        "msg":"Deleted"
+    }
 
 if __name__ == "__main__":
     app.run(debug=True)
