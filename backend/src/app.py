@@ -2,11 +2,10 @@ from flask import Flask, request,jsonify
 from flask_cors import CORS
 from connection import Connection
 app = Flask(__name__)
-#Apply configurations
-app.config["MYSQL_HOST"]= "localhost"
-app.config["MYSQL_USER"]= "root"
-app.config["MYSQL_PASSWORD"]= "password"
-app.config["MYSQL_DB"] = "oportunitiessedscr"
+app.config['MYSQL_HOST'] = 'localhost'
+app.config['MYSQL_USER'] = 'root'
+app.config['MYSQL_PASSWORD'] = 'password'
+app.config['MYSQL_DB'] = 'oportunitiessedscr'
 CORS(app)
 con = Connection(app)
 @app.route("/competences", methods = ["POST"])
@@ -22,7 +21,8 @@ def createCompetence():
         request.json["cost"],
         request.json["attendance"],
         request.json["mode"],
-        request.json["language"])
+        request.json["language"]
+        )
     return {"msg": "Created"}
 @app.route("/competences", methods = ["GET"])
 #Mostrar todas las competencias

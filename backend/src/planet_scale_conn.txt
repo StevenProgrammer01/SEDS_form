@@ -1,0 +1,4 @@
+HOST=aws.connect.psdb.cloud
+USERNAME=09egpivtamqg9zmjv1y
+PASSWORD=pscale_pw_ChtDkNOycbwyK3ciJVc1JseEg2KccoGTl4v7tlXoipV
+DATABASE=seds_db
