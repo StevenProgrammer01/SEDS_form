@@ -1,25 +1,44 @@
 import React, {useState, useEffect} from "react";
 const API = process.env.REACT_APP_BACK;
 export const Form=()=>{
+    const [data2, setData2] = useState(
+        {
+            id:"",
+            name : "",
+            general_info:"",
+            dates:"",
+            requirements:"",
+            source: "",
+            active:"",
+            cost:"",
+            attendance:"",
+            participation:"",
+            language:"",
+            url_image:""
+        }
+
+    );
     const [data, setData] = useState(
         {
             name : "",
             general_info:"",
-            date:"",
+            dates:"",
             requirements:"",
             source: "",
-            state:"",
+            active:"",
             cost:"",
             attendance:"",
-            mode:"",
-            language:""
+            participation:"",
+            language:"",
+            url_image:""
         }
 
     );
     const [competences, setCompetences] = useState([]);
     const getCompetences= async () =>{
-        const res = await fetch(`${API}/competences`);
+        const res = await fetch(`${API}/`);
         const data = await res.json()
+        console.log(data)
         setCompetences(data);
         
     }
@@ -33,25 +52,26 @@ export const Form=()=>{
 
     const editUser=async(id)=>{
         window.alert("Now you can edit your competence register");
+        console.log(id)
         setEditing(true);
         setId(id);
-        const res = await fetch(`${API}/competence/${id}`,{
+        
+        const res = await fetch(`${API}/`,{
         });
         const response = await res.json();
         console.log(response[0])
         setData({
             name : response[0].name,
             general_info:response[0].general_info,
-            date:response[0].date,
+            dates:response[0].dates,
             requirements:response[0].requirements,
             source: response[0].source,
-            state:response[0].state,
+            active:response[0].active,
             cost:response[0].cost,
             attendance:response[0].attendance,
-            mode:response[0].mode,
-            language:response[0].language
-           
-
+            participation:response[0].participation,
+            language:response[0].language,
+            url_image:response[0].url_image
         });
         //window.alert("Now you can edit the spaces of your competence register");
 
@@ -60,7 +80,7 @@ export const Form=()=>{
         const userResponse = window.confirm("Are you sure of delete this competence?")
 
         if (userResponse){
-            const res = await fetch(`${API}/competence/${id}`,{
+            const res = await fetch(`${API}/${id}`,{
                 method: "DELETE"
             });
             const response = await res.json();
@@ -72,9 +92,11 @@ export const Form=()=>{
     }
     const handleSubmit = async (e)=>{
         e.preventDefault();
+        //TODO: Hacer que funcione PUT con el API
+        data2.id = id
         if (!editing){
             //window.alert("No estoy editing");
-            const res = await fetch(`${API}/competences`,{
+            const res = await fetch(`${API}/`,{
                 headers: {
                     "Content-type":"application/json"
                 }, 
@@ -85,12 +107,14 @@ export const Form=()=>{
             console.log(response);
         }else{
             //window.alert("Editing");
-            const res = await fetch(`${API}/competence/${id}`, {
+            setData2(data)
+            console.log(data2)
+            const res = await fetch(`${API}/`, {
                 method:"PUT",
                 headers:{
                     "Content-Type":"application/json"
                 }, 
-                body:JSON.stringify(data)
+                body:JSON.stringify(data2)
             });
             const response = await res.json();
             console.log(response);
@@ -102,14 +126,15 @@ export const Form=()=>{
         setData({
             name : "",
             general_info:"",
-            date:"",
+            dates:"",
             requirements:"",
             source: "",
             state:"",
             cost:"",
             attendance:"",
-            mode:"",
-            language:""
+            participation:"",
+            language:"",
+            url_image:""
         })
 
         
@@ -152,14 +177,14 @@ export const Form=()=>{
                                 ></textarea>
                             </div>
                             <div className="mb-3 mt-3">
-                                <label htmlFor="date" className="form-label">Fecha:</label>
+                                <label htmlFor="dates" className="form-label">Fecha:</label>
                                 <input 
                                 type="date" 
                                 className="form-control" 
-                                id="date" 
+                                id="dates" 
                                 placeholder="Enter date" 
-                                name="date"
-                                value={data.date}
+                                name="dates"
+                                value={data.dates}
                                 onChange={handleChange}/>
                             </div>
                             <div className="mb-3">
@@ -173,10 +198,10 @@ export const Form=()=>{
                                 onChange={handleChange}></textarea>
                             </div>
                             <div className="mb-3 mt-3">
-                                <label htmlFor= "state" className="form-label">Estado:</label>
-                                <select id = "state" name = "state" className="form-select"
-                                value={data.state} onChange={handleChange} >
-                                    <option>Seleccione una opción</option>
+                                <label htmlFor= "active" className="form-label">Estado:</label>
+                                <select id = "active" name = "active" className="form-select"
+                                value={data.active} onChange={handleChange} >
+                                    <option value=" ">Seleccione una opción</option>
                                     <option value="Activo">Activo</option>
                                     <option value= "Inactivo">Inactivo</option>
                                 </select>
@@ -185,14 +210,25 @@ export const Form=()=>{
                         </div>
                         <div className="col-md-5">
                             <div className="mb-3 mt-3">
-                                <label htmlFor="src" className="form-label">Source:</label>
+                                <label htmlFor="source" className="form-label">Source:</label>
                                 <input 
                                 type="text" 
                                 className="form-control" 
-                                id="src" 
+                                id="source" 
                                 placeholder="Enter source: http://..." 
                                 name="source"
                                 value={data.source}
+                                onChange={handleChange}/>
+                            </div>
+                            <div className="mb-3 mt-3">
+                                <label htmlFor="url_image" className="form-label">URL_Image:</label>
+                                <input 
+                                type="text" 
+                                className="form-control" 
+                                id="url_image" 
+                                placeholder="Enter source: http://..." 
+                                name="url_image"
+                                value={data.url_image}
                                 onChange={handleChange}/>
                             </div>
                             <div className="mb-3 mt-3">
@@ -219,9 +255,9 @@ export const Form=()=>{
 
                             </div>
                             <div className="mb-3 mt-3">
-                                <label htmlFor= "mode" className="form-label">Participación:</label>
-                                <select id = "mode" className="form-select"  name= "mode"
-                                value={data.mode} onChange={handleChange}>
+                                <label htmlFor= "participation" className="form-label">Participación:</label>
+                                <select id = "participation" className="form-select"  name= "participation"
+                                value={data.participation} onChange={handleChange}>
                                     <option>Seleccione una opción</option>
                                     <option value= "Individual">Individual</option>
                                     <option value= "Equipo">Equipo</option>
@@ -230,8 +266,8 @@ export const Form=()=>{
 
                             </div>
                             <div className="mb-3 mt-3">
-                                <label htmlFor= "lang" className="form-label">Language:</label>
-                                <select id = "lang" className="form-select"  name= "language"
+                                <label htmlFor= "language" className="form-label">Language:</label>
+                                <select id = "language" className="form-select"  name= "language"
                                 value={data.language} onChange={handleChange}>
                                     <option>Seleccione una opción</option>
                                     <option value= "Inglés">Inglés</option>
@@ -266,6 +302,7 @@ export const Form=()=>{
                                 <th>Attendance</th>
                                 <th>Mode</th>
                                 <th>Language</th>
+                                <th>Image</th>
                                 <th>Operations</th>
                             </tr>
 
@@ -273,25 +310,26 @@ export const Form=()=>{
                         <tbody>
                             {competences.map(competence=>(
                                 
-                                <tr key = {competence._id}>
+                                <tr key = {competence.id}>
                                     <td>{competence.name}</td>
                                     <td>{competence.general_info}</td>
-                                    <td>{competence.date}</td>
+                                    <td>{competence.dates}</td>
                                     <td>{competence.requirements}</td>
                                     <td>{competence.source}</td>
-                                    <td>{competence.state}</td>
+                                    <td>{competence.active}</td>
                                     <td>{competence.cost}</td>
                                     <td>{competence.attendance}</td>
-                                    <td>{competence.mode}</td>
+                                    <td>{competence.participation}</td>
                                     <td>{competence.language}</td>
+                                    <td>{competence.url_image}</td>
                                     <td>
                                         <button className="btn btn-secondary btn-sm btn-block"
-                                        onClick={(e)=>editUser(competence._id)}
+                                        onClick={(e)=>editUser(competence.id)}
                                         Delete>
                                             Edit
                                         </button>
                                         <button className="btn btn-danger btn-sm btn-block"
-                                        onClick={(e)=>deleteUser(competence._id)}>
+                                        onClick={(e)=>deleteUser(competence.id)}>
                                             Delete
                                         </button>
                                     </td>

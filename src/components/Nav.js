@@ -9,7 +9,7 @@ export const Nav = ()=>{
                     <ul className="nav nav-tabs">
                         <li>
                             <div>
-                            <img src = {logo} width="50" height="50"/>
+                            <img src = {logo} width="50" height="50" alt = "logo"/>
                             </div>
                         </li>
                         <li className="nav-item">
