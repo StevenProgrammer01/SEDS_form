@@ -1,23 +1,6 @@
 import React, {useState, useEffect} from "react";
 const API = process.env.REACT_APP_BACK;
 export const Form=()=>{
-    const [data2, setData2] = useState(
-        {
-            id:"",
-            name : "",
-            general_info:"",
-            dates:"",
-            requirements:"",
-            source: "",
-            active:"",
-            cost:"",
-            attendance:"",
-            participation:"",
-            language:"",
-            url_image:""
-        }
-
-    );
     const [data, setData] = useState(
         {
             name : "",
@@ -38,7 +21,7 @@ export const Form=()=>{
     const getCompetences= async () =>{
         const res = await fetch(`${API}/`);
         const data = await res.json()
-        console.log(data)
+        //console.log(data)
         setCompetences(data);
         
     }
@@ -52,26 +35,26 @@ export const Form=()=>{
 
     const editUser=async(id)=>{
         window.alert("Now you can edit your competence register");
-        console.log(id)
+        //console.log(id)
         setEditing(true);
         setId(id);
         
-        const res = await fetch(`${API}/`,{
+        const res = await fetch(`${API}/${id}`,{
         });
         const response = await res.json();
-        console.log(response[0])
+        //console.log(response)
         setData({
-            name : response[0].name,
-            general_info:response[0].general_info,
-            dates:response[0].dates,
-            requirements:response[0].requirements,
-            source: response[0].source,
-            active:response[0].active,
-            cost:response[0].cost,
-            attendance:response[0].attendance,
-            participation:response[0].participation,
-            language:response[0].language,
-            url_image:response[0].url_image
+            name : response.name,
+            general_info:response.general_info,
+            dates:response.dates,
+            requirements:response.requirements,
+            source: response.source,
+            active:response.active,
+            cost:response.cost,
+            attendance:response.attendance,
+            participation:response.participation,
+            language:response.language,
+            url_image:response.url_image
         });
         //window.alert("Now you can edit the spaces of your competence register");
 
@@ -93,7 +76,7 @@ export const Form=()=>{
     const handleSubmit = async (e)=>{
         e.preventDefault();
         //TODO: Hacer que funcione PUT con el API
-        data2.id = id
+        
         if (!editing){
             //window.alert("No estoy editing");
             const res = await fetch(`${API}/`,{
@@ -107,14 +90,13 @@ export const Form=()=>{
             console.log(response);
         }else{
             //window.alert("Editing");
-            setData2(data)
-            console.log(data2)
-            const res = await fetch(`${API}/`, {
+            
+            const res = await fetch(`${API}/${id}`, {
                 method:"PUT",
                 headers:{
                     "Content-Type":"application/json"
                 }, 
-                body:JSON.stringify(data2)
+                body:JSON.stringify(data)
             });
             const response = await res.json();
             console.log(response);
@@ -287,62 +269,67 @@ export const Form=()=>{
                 </form>
 
             </div>
-                <div className="container p-4">
-                <div className="col md-8">
-                    <table className="table table-stripped">
-                        <thead>
-                            <tr >
-                                <th>Name</th>
-                                <th>G_info</th>
-                                <th>Date</th>
-                                <th>Requirements</th>
-                                <th>Source</th>
-                                <th>Status</th>
-                                <th>Cost</th>
-                                <th>Attendance</th>
-                                <th>Mode</th>
-                                <th>Language</th>
-                                <th>Image</th>
-                                <th>Operations</th>
-                            </tr>
+            <div className="container p-4">
+                <div className="card card-body">
+                    <div className="table-responsive">
+                        <div className="col md-8">
+                            <table className="table table-stripped">
+                                <thead>
+                                    <tr >
+                                        <th>Name</th>
+                                        <th>G_info</th>
+                                        <th>Date</th>
+                                        <th>Requirements</th>
+                                        <th>Source</th>
+                                        <th>Status</th>
+                                        <th>Cost</th>
+                                        <th>Attendance</th>
+                                        <th>Mode</th>
+                                        <th>Language</th>
+                                        <th>Image</th>
+                                        <th>Operations</th>
+                                    </tr>
 
-                        </thead>
-                        <tbody>
-                            {competences.map(competence=>(
-                                
-                                <tr key = {competence.id}>
-                                    <td>{competence.name}</td>
-                                    <td>{competence.general_info}</td>
-                                    <td>{competence.dates}</td>
-                                    <td>{competence.requirements}</td>
-                                    <td>{competence.source}</td>
-                                    <td>{competence.active}</td>
-                                    <td>{competence.cost}</td>
-                                    <td>{competence.attendance}</td>
-                                    <td>{competence.participation}</td>
-                                    <td>{competence.language}</td>
-                                    <td>{competence.url_image}</td>
-                                    <td>
-                                        <button className="btn btn-secondary btn-sm btn-block"
-                                        onClick={(e)=>editUser(competence.id)}
-                                        Delete>
-                                            Edit
-                                        </button>
-                                        <button className="btn btn-danger btn-sm btn-block"
-                                        onClick={(e)=>deleteUser(competence.id)}>
-                                            Delete
-                                        </button>
-                                    </td>
+                                </thead>
+                                <tbody>
+                                    {competences.map(competence=>(
+                                        
+                                        <tr key = {competence.id}>
+                                            <td>{competence.name}</td>
+                                            <td>{competence.general_info}</td>
+                                            <td>{competence.dates}</td>
+                                            <td>{competence.requirements}</td>
+                                            <td>{competence.source}</td>
+                                            <td>{competence.active}</td>
+                                            <td>{competence.cost}</td>
+                                            <td>{competence.attendance}</td>
+                                            <td>{competence.participation}</td>
+                                            <td>{competence.language}</td>
+                                            <td>{competence.url_image}</td>
+                                            <td>
+                                                <button className="btn btn-secondary btn-sm btn-block"
+                                                onClick={(e)=>editUser(competence.id)}
+                                                Delete>
+                                                    Edit
+                                                </button>
+                                                <button className="btn btn-danger btn-sm btn-block"
+                                                onClick={(e)=>deleteUser(competence.id)}>
+                                                    Delete
+                                                </button>
+                                            </td>
+                                            
+
+                                        </tr>
+                                    ))}
+
+                                </tbody>
                                     
+                            </table>
+                        </div>
+                    </div>
 
-                                </tr>
-                            ))}
-
-                        </tbody>
-                            
-                    </table>
                 </div>
-
+                
             </div>
     
         </>
