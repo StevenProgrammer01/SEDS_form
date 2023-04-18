@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/SEDS_form/static/css/main.61a658fa.css",
+    "main.js": "/SEDS_form/static/js/main.76a24c0f.js",
+    "static/js/787.cda612ba.chunk.js": "/SEDS_form/static/js/787.cda612ba.chunk.js",
+    "static/media/logo.png": "/SEDS_form/static/media/logo.f445c1b7d4088debf31f.png",
+    "index.html": "/SEDS_form/index.html",
+    "main.61a658fa.css.map": "/SEDS_form/static/css/main.61a658fa.css.map",
+    "main.76a24c0f.js.map": "/SEDS_form/static/js/main.76a24c0f.js.map",
+    "787.cda612ba.chunk.js.map": "/SEDS_form/static/js/787.cda612ba.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.61a658fa.css",
+    "static/js/main.76a24c0f.js"
+  ]
+}
