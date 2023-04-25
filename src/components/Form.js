@@ -249,7 +249,7 @@ export const Form=(props)=>{
 
                             </div>
                             <div className="mb-3 mt-3">
-                                <label htmlFor= "language" className="form-label">Lenguage:</label>
+                                <label htmlFor= "language" className="form-label">Idioma:</label>
                                 <select id = "language" className="form-select"  name= "language"
                                 value={data.language} onChange={handleChange}>
                                     <option>Seleccione una opción</option>
