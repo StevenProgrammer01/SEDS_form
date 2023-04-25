@@ -1,5 +1,5 @@
 import { Form } from "./Form";
-export const Pasantias_Bootcamps = ()=>{
+export const PasantiasBootcamps = ()=>{
     return(
         <>
             <div className="container p-5 my-5 bg-dark text-white text-center rounded-pill w-50">
