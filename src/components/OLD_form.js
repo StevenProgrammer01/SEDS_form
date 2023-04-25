@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 const API = process.env.REACT_APP_BACK;
-export const Form=(props)=>{
+export const Form=()=>{
     const [data, setData] = useState(
         {
             name : "",
@@ -17,13 +17,12 @@ export const Form=(props)=>{
         }
 
     );
-    const [registers, setRegisters] = useState([]);
+    const [competences, setCompetences] = useState([]);
     const getCompetences= async () =>{
-        //alert(props.field);
-        const res = await fetch(`${API}/${props.field}`);
+        const res = await fetch(`${API}/`);
         const data = await res.json()
         //console.log(data)
-        setRegisters(data);
+        setCompetences(data);
         
     }
     useEffect(()=>{
@@ -34,13 +33,13 @@ export const Form=(props)=>{
 
 
 
-    const editRegister=async(id)=>{
-        window.alert("Now you can edit your register");
+    const editUser=async(id)=>{
+        window.alert("Now you can edit your competence register");
         //console.log(id)
         setEditing(true);
         setId(id);
         
-        const res = await fetch(`${API}/${props.field}/${id}`,{
+        const res = await fetch(`${API}/${id}`,{
         });
         const response = await res.json();
         //console.log(response)
@@ -60,11 +59,11 @@ export const Form=(props)=>{
         //window.alert("Now you can edit the spaces of your competence register");
 
     }
-    const deleteRegister=async(id)=>{
-        const userResponse = window.confirm("Are you sure of delete this register?")
+    const deleteUser=async(id)=>{
+        const userResponse = window.confirm("Are you sure of delete this competence?")
 
         if (userResponse){
-            const res = await fetch(`${API}/${props.field}/${id}`,{
+            const res = await fetch(`${API}/${id}`,{
                 method: "DELETE"
             });
             const response = await res.json();
@@ -80,7 +79,7 @@ export const Form=(props)=>{
         
         if (!editing){
             //window.alert("No estoy editing");
-            const res = await fetch(`${API}/${props.field}`,{
+            const res = await fetch(`${API}/`,{
                 headers: {
                     "Content-type":"application/json"
                 }, 
@@ -92,7 +91,7 @@ export const Form=(props)=>{
         }else{
             //window.alert("Editing");
             
-            const res = await fetch(`${API}/${props.field}/${id}`, {
+            const res = await fetch(`${API}/${id}`, {
                 method:"PUT",
                 headers:{
                     "Content-Type":"application/json"
@@ -131,7 +130,7 @@ export const Form=(props)=>{
     };
     return(
         <>
-            <div className="container p-4">
+            <div className="container p-4 ">
                 <form className="card card-body" onSubmit={handleSubmit}>
                     <div className="row">
                         <div className="col-md-6">
@@ -193,7 +192,7 @@ export const Form=(props)=>{
                         </div>
                         <div className="col-md-5">
                             <div className="mb-3 mt-3">
-                                <label htmlFor="source" className="form-label">Fuente:</label>
+                                <label htmlFor="source" className="form-label">Source:</label>
                                 <input 
                                 type="text" 
                                 className="form-control" 
@@ -204,7 +203,7 @@ export const Form=(props)=>{
                                 onChange={handleChange}/>
                             </div>
                             <div className="mb-3 mt-3">
-                                <label htmlFor="url_image" className="form-label">Dirección_Imagen:</label>
+                                <label htmlFor="url_image" className="form-label">URL_Image:</label>
                                 <input 
                                 type="text" 
                                 className="form-control" 
@@ -249,7 +248,7 @@ export const Form=(props)=>{
 
                             </div>
                             <div className="mb-3 mt-3">
-                                <label htmlFor= "language" className="form-label">Lenguage:</label>
+                                <label htmlFor= "language" className="form-label">Language:</label>
                                 <select id = "language" className="form-select"  name= "language"
                                 value={data.language} onChange={handleChange}>
                                     <option>Seleccione una opción</option>
@@ -293,29 +292,29 @@ export const Form=(props)=>{
 
                                 </thead>
                                 <tbody>
-                                    {registers.map(register=>(
+                                    {competences.map(competence=>(
                                         
-                                        <tr key = {register.id}>
-                                            <td>{register.name}</td>
-                                            <td>{register.general_info}</td>
-                                            <td>{register.dates}</td>
-                                            <td>{register.requirements}</td>
-                                            <td>{register.source}</td>
-                                            <td>{register.active}</td>
-                                            <td>{register.cost}</td>
-                                            <td>{register.attendance}</td>
-                                            <td>{register.participation}</td>
-                                            <td>{register.language}</td>
-                                            <td>{register.url_image}</td>
+                                        <tr key = {competence.id}>
+                                            <td>{competence.name}</td>
+                                            <td>{competence.general_info}</td>
+                                            <td>{competence.dates}</td>
+                                            <td>{competence.requirements}</td>
+                                            <td>{competence.source}</td>
+                                            <td>{competence.active}</td>
+                                            <td>{competence.cost}</td>
+                                            <td>{competence.attendance}</td>
+                                            <td>{competence.participation}</td>
+                                            <td>{competence.language}</td>
+                                            <td>{competence.url_image}</td>
                                             <td>
                                                 <button className="btn btn-secondary btn-sm btn-block"
-                                                onClick={(e)=>editRegister(register.id)}
+                                                onClick={(e)=>editUser(competence.id)}
                                                 Delete>
-                                                    Editar
+                                                    Edit
                                                 </button>
                                                 <button className="btn btn-danger btn-sm btn-block"
-                                                onClick={(e)=>deleteRegister(register.id)}>
-                                                    Borrar
+                                                onClick={(e)=>deleteUser(competence.id)}>
+                                                    Delete
                                                 </button>
                                             </td>
                                             

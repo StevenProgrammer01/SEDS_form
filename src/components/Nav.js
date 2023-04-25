@@ -13,10 +13,16 @@ export const Nav = ()=>{
                             </div>
                         </li>
                         <li className="nav-item">
-                            <Link  className="nav-link active" to = "/">Competences</Link>
+                            <Link  className="nav-link active" to = "/">Competencias</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link" to = "/becas">Becas</Link>
+                            <Link className="nav-link" to = "/pasantias-bootcamps">Pasantías & Bootcamps</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link className="nav-link" to = "/programas">Programas</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link className="nav-link" to = "/misiones-analogas">Misiones Análogas</Link>
                         </li>
                     </ul>
                 </div>
