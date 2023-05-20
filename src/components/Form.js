@@ -26,10 +26,12 @@ export const Form=(props)=>{
         setRegisters(data);
         
     }
+    /*
     useEffect(()=>{
         getCompetences();
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }),[];
+    }),[];*/
+    getCompetences();
     const [editing, setEditing] = useState(false);
     const [id, setId] = useState("");
 
