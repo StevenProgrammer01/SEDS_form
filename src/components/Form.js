@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 const API = process.env.REACT_APP_BACK;
 export const Form=(props)=>{
-    const [count, setCount] = useState(0);
+    //const [count, setCount] = useState(0);
     const [data, setData] = useState(
         {
             name : "",
@@ -75,7 +75,7 @@ export const Form=(props)=>{
             console.log(response);
             await getCompetences();
         }
-        setCount(count+1);
+        //setCount(count+1);
         
 
     }
@@ -94,7 +94,7 @@ export const Form=(props)=>{
             })
             const response = await res.json();
             console.log(response);
-            setCount(count+1);
+            //setCount(count+1);
         }else{
             //window.alert("Editing");
             
@@ -109,7 +109,7 @@ export const Form=(props)=>{
             console.log(response);
             setEditing(false)
             setId("");
-            setCount(count+1);
+            //setCount(count+1);
 
         }
         await getCompetences();
