@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 const API = process.env.REACT_APP_BACK;
 export const Form=(props)=>{
     const [data, setData] = useState(
