@@ -28,10 +28,10 @@ export const Form=(props)=>{
         
     }
     
-    useEffect(()=>{
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    useEffect(() => {
         getCompetences();
-       
-    },[count]);
+    }, []);
     //getCompetences();
     const [editing, setEditing] = useState(false);
     const [id, setId] = useState("");
