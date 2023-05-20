@@ -31,7 +31,7 @@ export const Form=(props)=>{
     useEffect(()=>{
         getCompetences();
        
-    }),[count];
+    },[count]);
     //getCompetences();
     const [editing, setEditing] = useState(false);
     const [id, setId] = useState("");
