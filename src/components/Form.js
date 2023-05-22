@@ -31,7 +31,7 @@ export const Form=(props)=>{
     // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(() => {
         getCompetences();
-    }, []);
+    }, [getCompetences()]);
     //getCompetences();
     const [editing, setEditing] = useState(false);
     const [id, setId] = useState("");
@@ -238,7 +238,7 @@ export const Form=(props)=>{
                                 value={data.attendance} onChange={handleChange}>
                                     <option>Seleccione una opción</option>
                                     <option value= "Virtual">Virtual</option>
-                                    <option value= "Prescencial">Prescencial</option>
+                                    <option value= "Prescencial">Presencial</option>
                                     <option value= "Mixto">Mixto</option>
                                     <option value= "Electivo">Electivo</option>
                                 </select>
