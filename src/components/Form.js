@@ -234,7 +234,7 @@ export const Form=(props)=>{
                                 value={data.attendance} onChange={handleChange}>
                                     <option>Seleccione una opción</option>
                                     <option value= "Virtual">Virtual</option>
-                                    <option value= "Prescencial">Presencial</option>
+                                    <option value= "Presencial">Presencial</option>
                                     <option value= "Mixto">Mixto</option>
                                     <option value= "Electivo">Electivo</option>
                                 </select>
